@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,8 +6,7 @@
 
 @layer base {
   :root {
-    /* Dark navy base with light cards and pastel accents */
-    --background: 238, 255, 0;
+    --background: 225 25% 8%; 
     --foreground: 210 20% 95%;
 
     --card: 225 20% 13%;
@@ -46,7 +45,6 @@
     --sidebar-border: 225 15% 18%;
     --sidebar-ring: 260 70% 65%;
 
-    /* Custom tokens */
     --lavender: 260 70% 65%;
     --lavender-light: 260 50% 25%;
     --mint: 160 45% 45%;
@@ -98,5 +96,133 @@
   }
   .glow-gold {
     box-shadow: 0 0 20px hsl(40 85% 60% / 0.3), 0 0 40px hsl(40 85% 60% / 0.1);
+  }
+} */
+
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Flipkart-inspired: Blue, Yellow, White */
+    --background: 213 85% 18%;         /* Deep Flipkart blue */
+    --foreground: 0 0% 100%;           /* White text */
+
+    --card: 213 80% 22%;               /* Slightly lighter blue card */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 213 80% 22%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 45 100% 51%;            /* Flipkart yellow #FFD200 */
+    --primary-foreground: 213 85% 12%; /* Dark blue on yellow */
+
+    --secondary: 213 75% 30%;          /* Mid blue */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 213 70% 26%;              /* Muted blue */
+    --muted-foreground: 213 30% 70%;   /* Soft blue-white */
+
+    --accent: 45 100% 51%;             /* Yellow accent */
+    --accent-foreground: 213 85% 12%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 213 60% 28%;
+    --input: 213 65% 25%;
+    --ring: 45 100% 51%;               /* Yellow focus ring */
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 213 85% 14%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 45 100% 51%;
+    --sidebar-primary-foreground: 213 85% 12%;
+    --sidebar-accent: 213 70% 28%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 213 60% 25%;
+    --sidebar-ring: 45 100% 51%;
+
+    /* Custom tokens */
+    --flipkart-blue: 213 85% 25%;
+    --flipkart-blue-dark: 213 85% 14%;
+    --flipkart-blue-light: 213 70% 35%;
+    --flipkart-yellow: 45 100% 51%;
+    --flipkart-yellow-light: 45 100% 70%;
+    --flipkart-white: 0 0% 100%;
+    --flipkart-offwhite: 213 20% 92%;
+
+    --gradient-hero: linear-gradient(135deg, hsla(54, 100%, 51%, 0.95), hsla(52, 100%, 52%, 0.9), hsl(45 100% 51% / 0.08));
+    --gradient-card: linear-gradient(180deg, hsl(213 80% 24%), hsl(48, 94%, 52%));
+    --gradient-yellow: linear-gradient(135deg, hsl(45 100% 55%), hsl(40 100% 45%));
+    --shadow-soft: 0 4px 20px -4px hsl(213 85% 10% / 0.5);
+    --shadow-hover: 0 8px 30px -4px hsl(213 85% 10% / 0.65);
+    --shadow-yellow: 0 4px 20px -4px hsl(45 100% 51% / 0.35);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .gradient-yellow {
+    background: var(--gradient-yellow);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+  .shadow-yellow {
+    box-shadow: var(--shadow-yellow);
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px hsl(213 85% 45% / 0.4), 0 0 40px hsl(213 85% 45% / 0.15);
+  }
+  .glow-yellow {
+    box-shadow: 0 0 20px hsl(45 100% 51% / 0.4), 0 0 40px hsl(45 100% 51% / 0.15);
+  }
+  .btn-yellow {
+    background: var(--gradient-yellow);
+    color: hsl(213 85% 12%);
+    font-weight: 700;
+  }
+  .btn-yellow:hover {
+    box-shadow: var(--shadow-yellow);
+  }
+  .card-blue {
+    background: var(--gradient-card);
+    border: 1px solid hsl(213 60% 28%);
+  }
+  .text-yellow {
+    color: hsl(45 100% 51%);
+  }
+  .text-blue-light {
+    color: hsl(213 70% 75%);
   }
 }
