@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import OrderForm from "./pages/OrderForm";
 import Payment from "./pages/Payment";
+import PaymentCOD from "./pages/PaymentCOD";
+import PaymentOnline from "./pages/PaymentOnline";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import AdminLogin from "./pages/AdminLogin";
@@ -29,6 +31,8 @@ const App = () => (
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/order/:id" element={<OrderForm />} />
           <Route path="/payment/:orderId" element={<Payment />} />
+          <Route path="/payment/:orderId/cod" element={<PaymentCOD />} />
+          <Route path="/payment/:orderId/online" element={<PaymentOnline />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/admin" element={<AdminLogin />} />

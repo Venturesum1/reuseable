@@ -6,87 +6,61 @@
 
 @layer base {
   :root {
-    --background: 30 50% 98%;
-    --foreground: 240 20% 20%;
+    /* Dark navy base with light cards and pastel accents */
+    --background: 225 25% 8%;
+    --foreground: 210 20% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 20% 20%;
+    --card: 225 20% 13%;
+    --card-foreground: 210 20% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 20% 20%;
+    --popover: 225 20% 13%;
+    --popover-foreground: 210 20% 95%;
 
-    --primary: 260 60% 65%;
+    --primary: 260 70% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 150 40% 88%;
-    --secondary-foreground: 150 30% 25%;
+    --secondary: 160 45% 45%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 260 20% 95%;
-    --muted-foreground: 240 10% 50%;
+    --muted: 225 15% 16%;
+    --muted-foreground: 220 15% 55%;
 
-    --accent: 20 80% 85%;
-    --accent-foreground: 20 60% 30%;
+    --accent: 40 85% 60%;
+    --accent-foreground: 225 25% 8%;
 
-    --destructive: 0 72% 60%;
+    --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 260 20% 90%;
-    --input: 260 15% 92%;
-    --ring: 260 60% 65%;
+    --border: 225 15% 18%;
+    --input: 225 15% 20%;
+    --ring: 260 70% 65%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 260 30% 97%;
-    --sidebar-foreground: 240 20% 20%;
-    --sidebar-primary: 260 60% 65%;
+    --sidebar-background: 225 22% 10%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 260 70% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 150 40% 92%;
-    --sidebar-accent-foreground: 150 30% 25%;
-    --sidebar-border: 260 20% 90%;
-    --sidebar-ring: 260 60% 65%;
+    --sidebar-accent: 160 45% 20%;
+    --sidebar-accent-foreground: 160 45% 88%;
+    --sidebar-border: 225 15% 18%;
+    --sidebar-ring: 260 70% 65%;
 
     /* Custom tokens */
-    --lavender: 260 60% 65%;
-    --lavender-light: 260 40% 92%;
-    --mint: 150 40% 75%;
-    --mint-light: 150 40% 92%;
-    --peach: 20 80% 80%;
-    --peach-light: 20 60% 93%;
-    --blush: 340 40% 90%;
-    --gradient-hero: linear-gradient(135deg, hsl(260 60% 65% / 0.15), hsl(150 40% 75% / 0.1), hsl(20 80% 80% / 0.15));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(260 20% 98%));
-    --shadow-soft: 0 4px 20px -4px hsl(260 40% 50% / 0.1);
-    --shadow-hover: 0 8px 30px -4px hsl(260 40% 50% / 0.18);
-  }
+    --lavender: 260 70% 65%;
+    --lavender-light: 260 50% 25%;
+    --mint: 160 45% 45%;
+    --mint-light: 160 35% 20%;
+    --peach: 20 80% 70%;
+    --peach-light: 20 60% 25%;
+    --blush: 340 50% 65%;
+    --gold: 40 85% 60%;
+    --gold-light: 40 60% 20%;
 
-  .dark {
-    --background: 240 20% 8%;
-    --foreground: 30 20% 92%;
-    --card: 240 18% 12%;
-    --card-foreground: 30 20% 92%;
-    --popover: 240 18% 12%;
-    --popover-foreground: 30 20% 92%;
-    --primary: 260 60% 70%;
-    --primary-foreground: 240 20% 8%;
-    --secondary: 150 30% 20%;
-    --secondary-foreground: 150 40% 88%;
-    --muted: 240 15% 18%;
-    --muted-foreground: 240 10% 60%;
-    --accent: 20 60% 25%;
-    --accent-foreground: 20 80% 85%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 240 15% 20%;
-    --input: 240 15% 20%;
-    --ring: 260 60% 70%;
-    --sidebar-background: 240 18% 10%;
-    --sidebar-foreground: 30 20% 92%;
-    --sidebar-primary: 260 60% 70%;
-    --sidebar-primary-foreground: 240 20% 8%;
-    --sidebar-accent: 150 30% 18%;
-    --sidebar-accent-foreground: 150 40% 88%;
-    --sidebar-border: 240 15% 20%;
-    --sidebar-ring: 260 60% 70%;
+    --gradient-hero: linear-gradient(135deg, hsl(260 70% 65% / 0.15), hsl(220 80% 55% / 0.1), hsl(40 85% 60% / 0.1));
+    --gradient-card: linear-gradient(180deg, hsl(225 20% 15%), hsl(225 20% 11%));
+    --shadow-soft: 0 4px 20px -4px hsl(260 50% 30% / 0.25);
+    --shadow-hover: 0 8px 30px -4px hsl(260 50% 40% / 0.35);
   }
 }
 
@@ -112,12 +86,17 @@
   .shadow-hover {
     box-shadow: var(--shadow-hover);
   }
-   .scrollbar-hide {
+  .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+  .glow-purple {
+    box-shadow: 0 0 20px hsl(260 70% 65% / 0.3), 0 0 40px hsl(260 70% 65% / 0.1);
+  }
+  .glow-gold {
+    box-shadow: 0 0 20px hsl(40 85% 60% / 0.3), 0 0 40px hsl(40 85% 60% / 0.1);
+  }
 }
-

@@ -65,7 +65,7 @@ function HeroBanner({ products }: { products: any[] }) {
   const slide = slides[current];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary/15 via-primary/5 to-accent/10">
+    <section className="relative overflow-hidden gradient-hero">
       <div className="container py-10 md:py-16">
         <div className="grid md:grid-cols-2 gap-8 items-center min-h-[320px]">
           <motion.div key={current} initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
@@ -76,7 +76,7 @@ function HeroBanner({ products }: { products: any[] }) {
               {slide.name}
             </h1>
             <p className="mt-3 text-muted-foreground max-w-md">{slide.short_description || slide.description}</p>
-            <p className="mt-4 font-display text-3xl font-bold text-primary">
+            <p className="mt-4 font-display text-3xl font-bold text-accent">
               ₹{Number(slide.price).toLocaleString()}
             </p>
             <div className="mt-6 flex gap-3">
@@ -418,7 +418,7 @@ export default function Index() {
 
       {/* Bottom Promo Banner */}
       {!search && (
-        <section className="bg-gradient-to-r from-primary/20 via-primary/10 to-accent/15 border-t border-primary/10">
+        <section className="bg-gradient-to-r from-primary/15 via-primary/5 to-accent/10 border-t border-border">
           <div className="container py-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <span className="text-[10px] font-bold uppercase tracking-widest text-primary">New Collection</span>
@@ -460,7 +460,7 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/40 bg-foreground/[0.02]">
+      <footer className="border-t border-border bg-card/50">
         <div className="container py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>

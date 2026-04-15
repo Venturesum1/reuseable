@@ -32,11 +32,11 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/40 bg-card/95 backdrop-blur-xl shadow-sm">
+    <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-xl shadow-lg">
       {/* Top bar */}
-      <div className="bg-primary/5 border-b border-border/20">
+      <div className="bg-primary/10 border-b border-border">
         <div className="container flex h-8 items-center justify-between text-xs text-muted-foreground">
-          <span>Free shipping on orders over ₹999</span>
+          <span className="flex items-center gap-1">🚚 Free shipping on orders over ₹999</span>
           <div className="hidden sm:flex items-center gap-4">
             <span>📞 +91 98765 43210</span>
             <span>✉️ support@resellerhub.com</span>
@@ -47,10 +47,10 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
       {/* Main nav */}
       <div className="container flex h-16 items-center gap-4">
         <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold text-foreground shrink-0">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md">
             <Store className="h-5 w-5" />
           </div>
-          <span className="hidden sm:inline">ResellerHub</span>
+          <span className="hidden sm:inline">Reseller<span className="text-accent">Hub</span></span>
         </Link>
 
         {/* Search bar */}
@@ -61,7 +61,7 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
               placeholder="Search for products..."
               value={localSearch}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="pl-10 pr-4 h-10 bg-muted/50 border-border/50 rounded-full text-sm focus:bg-card"
+              className="pl-10 pr-4 h-10 bg-muted/50 border-border rounded-full text-sm focus:bg-card focus:border-primary/50 text-foreground placeholder:text-muted-foreground"
             />
           </div>
         </div>
@@ -69,14 +69,14 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
         {/* Right actions */}
         <nav className="flex items-center gap-1 sm:gap-2 shrink-0">
           <Link to="/wishlist" className="relative flex flex-col items-center rounded-lg p-2 transition-colors hover:bg-muted group">
-            <Heart className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            <Heart className="h-5 w-5 text-muted-foreground group-hover:text-peach transition-colors" />
             <span className="text-[10px] text-muted-foreground hidden sm:block mt-0.5">Wishlist</span>
           </Link>
           <Link to="/cart" className="relative flex flex-col items-center rounded-lg p-2 transition-colors hover:bg-muted group">
             <div className="relative">
-              <ShoppingCart className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <ShoppingCart className="h-5 w-5 text-muted-foreground group-hover:text-accent transition-colors" />
               {cartCount > 0 && (
-                <Badge className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px]">
+                <Badge className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] bg-accent text-accent-foreground">
                   {cartCount}
                 </Badge>
               )}
@@ -86,7 +86,7 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="sm:hidden rounded-lg p-2 hover:bg-muted"
+            className="sm:hidden rounded-lg p-2 hover:bg-muted text-foreground"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -95,11 +95,11 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="sm:hidden border-t border-border/30 bg-card p-4 space-y-2">
-          <Link to="/wishlist" className="block rounded-lg px-4 py-2 hover:bg-muted text-sm" onClick={() => setMobileMenuOpen(false)}>
+        <div className="sm:hidden border-t border-border bg-card p-4 space-y-2">
+          <Link to="/wishlist" className="block rounded-lg px-4 py-2 hover:bg-muted text-sm text-foreground" onClick={() => setMobileMenuOpen(false)}>
             ❤️ Wishlist
           </Link>
-          <Link to="/cart" className="block rounded-lg px-4 py-2 hover:bg-muted text-sm" onClick={() => setMobileMenuOpen(false)}>
+          <Link to="/cart" className="block rounded-lg px-4 py-2 hover:bg-muted text-sm text-foreground" onClick={() => setMobileMenuOpen(false)}>
             🛒 Cart ({cartCount})
           </Link>
         </div>

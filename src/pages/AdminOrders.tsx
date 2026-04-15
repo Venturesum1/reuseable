@@ -6,6 +6,16 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+const getPaymentBadge = (method: string, status: string) => {
+  if (status === "completed" || method === "Online") {
+    return <Badge className="bg-green-500/20 text-green-400 border-green-500/30 hover:bg-green-500/30">Online Paid</Badge>;
+  }
+  if (method === "COD") {
+    return <Badge className="bg-yellow-500/20 text-yellow-500 border-yellow-500/30 hover:bg-yellow-500/30">COD</Badge>;
+  }
+  return <Badge className="bg-red-500/20 text-red-400 border-red-500/30 hover:bg-red-500/30">Pending</Badge>;
+};
+
 export default function AdminOrders() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -44,14 +54,16 @@ export default function AdminOrders() {
               <TableHead>Phone</TableHead>
               <TableHead>Address</TableHead>
               <TableHead>Product</TableHead>
+              <TableHead>Qty</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Date</TableHead>
-              <TableHead>Payment</TableHead>
+              <TableHead>Payment Type</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead>Confirmed</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orders?.map(o => (
+            {orders?.map((o: any) => (
               <TableRow key={o.id}>
                 <TableCell className="font-medium">{o.full_name}</TableCell>
                 <TableCell>{o.phone}</TableCell>
@@ -64,8 +76,10 @@ export default function AdminOrders() {
                     <p className="text-xs text-muted-foreground">ID: {o.product_id?.slice(0, 8)}</p>
                   </div>
                 </TableCell>
+                <TableCell>{o.quantity}</TableCell>
                 <TableCell className="font-semibold text-primary">₹{Number(o.total_price).toLocaleString()}</TableCell>
                 <TableCell className="text-sm text-muted-foreground">{new Date(o.created_at).toLocaleDateString()}</TableCell>
+                <TableCell>{getPaymentBadge(o.payment_method, o.payment_status)}</TableCell>
                 <TableCell>
                   <Badge variant={o.payment_status === "completed" ? "default" : "secondary"}>
                     {o.payment_status}

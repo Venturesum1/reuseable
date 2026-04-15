@@ -55,9 +55,9 @@ export default function ProductCard({ id, name, shortDescription, price, images,
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="overflow-hidden rounded-2xl border border-border/40 bg-card shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1">
+        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 hover:border-primary/30">
           {/* Image */}
-          <div className="relative aspect-square overflow-hidden bg-muted/30">
+          <div className="relative aspect-square overflow-hidden bg-muted/20">
             <img
               src={image}
               alt={name}
@@ -66,7 +66,7 @@ export default function ProductCard({ id, name, shortDescription, price, images,
 
             {/* Stock badge */}
             {stock <= 0 && (
-              <div className="absolute inset-0 bg-foreground/40 flex items-center justify-center">
+              <div className="absolute inset-0 bg-background/60 flex items-center justify-center backdrop-blur-sm">
                 <span className="bg-destructive text-destructive-foreground px-3 py-1 rounded-full text-xs font-semibold">
                   Out of Stock
                 </span>
@@ -74,7 +74,7 @@ export default function ProductCard({ id, name, shortDescription, price, images,
             )}
             {stock > 0 && stock <= 5 && (
               <div className="absolute top-3 left-3">
-                <span className="bg-accent text-accent-foreground px-2 py-0.5 rounded-full text-[10px] font-semibold">
+                <span className="bg-accent text-accent-foreground px-2 py-0.5 rounded-full text-[10px] font-semibold shadow-sm">
                   Only {stock} left
                 </span>
               </div>
@@ -88,20 +88,20 @@ export default function ProductCard({ id, name, shortDescription, price, images,
             >
               <button
                 onClick={handleWishlist}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-card/90 backdrop-blur-sm shadow-md transition-all hover:bg-primary hover:text-primary-foreground"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-card/90 backdrop-blur-sm shadow-md transition-all hover:bg-primary hover:text-primary-foreground border border-border"
               >
-                <Heart className={`h-4 w-4 ${wishlisted ? "fill-destructive text-destructive" : ""}`} />
+                <Heart className={`h-4 w-4 ${wishlisted ? "fill-peach text-peach" : ""}`} />
               </button>
               <button
                 onClick={handleAddToCart}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-card/90 backdrop-blur-sm shadow-md transition-all hover:bg-primary hover:text-primary-foreground"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-card/90 backdrop-blur-sm shadow-md transition-all hover:bg-primary hover:text-primary-foreground border border-border"
               >
                 <ShoppingCart className="h-4 w-4" />
               </button>
               <Link
                 to={`/product/${id}`}
                 onClick={(e) => e.stopPropagation()}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-card/90 backdrop-blur-sm shadow-md transition-all hover:bg-primary hover:text-primary-foreground"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-card/90 backdrop-blur-sm shadow-md transition-all hover:bg-primary hover:text-primary-foreground border border-border"
               >
                 <Eye className="h-4 w-4" />
               </Link>
@@ -118,9 +118,9 @@ export default function ProductCard({ id, name, shortDescription, price, images,
               <p className="mt-1 text-xs text-muted-foreground line-clamp-1">{shortDescription}</p>
             )}
             <div className="mt-3 flex items-center justify-between">
-              <span className="font-display text-lg font-bold text-primary">₹{price.toLocaleString()}</span>
+              <span className="font-display text-lg font-bold text-accent">₹{price.toLocaleString()}</span>
               {stock > 0 && (
-                <span className="text-[10px] text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] text-secondary bg-secondary/10 px-2 py-0.5 rounded-full font-medium">
                   In Stock
                 </span>
               )}

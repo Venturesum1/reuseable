@@ -42,6 +42,7 @@ export type Database = {
           full_name: string
           id: string
           is_confirmed: boolean
+          payment_method: string
           payment_status: string
           phone: string
           pincode: string
@@ -60,6 +61,7 @@ export type Database = {
           full_name: string
           id?: string
           is_confirmed?: boolean
+          payment_method?: string
           payment_status?: string
           phone: string
           pincode: string
@@ -78,6 +80,7 @@ export type Database = {
           full_name?: string
           id?: string
           is_confirmed?: boolean
+          payment_method?: string
           payment_status?: string
           phone?: string
           pincode?: string
