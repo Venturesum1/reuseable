@@ -12,6 +12,26 @@ import { motion } from "framer-motion";
 
 const COUNTRIES = ["India", "United States", "United Kingdom", "Canada", "Australia", "Germany", "France", "Japan", "Singapore", "UAE"];
 
+// ✅ Moved OUTSIDE OrderForm to prevent remount on every render
+const InputField = ({ icon: Icon, label, name, type = "text", required = true, placeholder, value, onChange, error }: any) => (
+  <div className="space-y-1.5">
+    <Label htmlFor={name} className="text-sm font-medium text-gray-300 flex items-center gap-1.5">
+      <Icon className="h-3.5 w-3.5 text-purple-400" />
+      {label} {required && <span className="text-red-400">*</span>}
+    </Label>
+    <Input
+      id={name}
+      name={name}
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={`bg-[#1a1d2e] border-[#2a2d3e] text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500/20 transition-all ${error ? 'border-red-500 ring-1 ring-red-500/20' : ''}`}
+    />
+    {error && <p className="text-xs text-red-400 mt-0.5">{error}</p>}
+  </div>
+);
+
 export default function OrderForm() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -98,25 +118,6 @@ export default function OrderForm() {
     </div>
   );
 
-  const InputField = ({ icon: Icon, label, name, type = "text", required = true, placeholder }: any) => (
-    <div className="space-y-1.5">
-      <Label htmlFor={name} className="text-sm font-medium text-gray-300 flex items-center gap-1.5">
-        <Icon className="h-3.5 w-3.5 text-purple-400" />
-        {label} {required && <span className="text-red-400">*</span>}
-      </Label>
-      <Input
-        id={name}
-        name={name}
-        type={type}
-        value={(form as any)[name]}
-        onChange={handleChange}
-        placeholder={placeholder}
-        className={`bg-[#1a1d2e] border-[#2a2d3e] text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500/20 transition-all ${errors[name] ? 'border-red-500 ring-1 ring-red-500/20' : ''}`}
-      />
-      {errors[name] && <p className="text-xs text-red-400 mt-0.5">{errors[name]}</p>}
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-[#0f1117]">
       <Navbar />
@@ -187,23 +188,92 @@ export default function OrderForm() {
               <h2 className="text-sm font-semibold text-white uppercase tracking-wider">Delivery Address</h2>
             </div>
 
-            <InputField icon={User} label="Full Name" name="full_name" placeholder="Enter your full name" />
+            <InputField
+              icon={User}
+              label="Full Name"
+              name="full_name"
+              placeholder="Enter your full name"
+              value={form.full_name}
+              onChange={handleChange}
+              error={errors.full_name}
+            />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <InputField icon={Phone} label="Mobile Number" name="phone" type="tel" placeholder="+91 XXXXX XXXXX" />
-              <InputField icon={Mail} label="Email Address" name="email" type="email" required={false} placeholder="your@email.com" />
+              <InputField
+                icon={Phone}
+                label="Mobile Number"
+                name="phone"
+                type="tel"
+                placeholder="+91 XXXXX XXXXX"
+                value={form.phone}
+                onChange={handleChange}
+                error={errors.phone}
+              />
+              <InputField
+                icon={Mail}
+                label="Email Address"
+                name="email"
+                type="email"
+                required={false}
+                placeholder="your@email.com"
+                value={form.email}
+                onChange={handleChange}
+                error={errors.email}
+              />
             </div>
 
-            <InputField icon={Home} label="House No. & Street" name="address" placeholder="House no, Building, Street" />
-            <InputField icon={MapPinned} label="Landmark" name="landmark" required={false} placeholder="Near..." />
+            <InputField
+              icon={Home}
+              label="House No. & Street"
+              name="address"
+              placeholder="House no, Building, Street"
+              value={form.address}
+              onChange={handleChange}
+              error={errors.address}
+            />
+
+            <InputField
+              icon={MapPinned}
+              label="Landmark"
+              name="landmark"
+              required={false}
+              placeholder="Near..."
+              value={form.landmark}
+              onChange={handleChange}
+              error={errors.landmark}
+            />
 
             <div className="grid grid-cols-2 gap-4">
-              <InputField icon={Building} label="City" name="city" placeholder="City" />
-              <InputField icon={Building} label="State" name="state" placeholder="State" />
+              <InputField
+                icon={Building}
+                label="City"
+                name="city"
+                placeholder="City"
+                value={form.city}
+                onChange={handleChange}
+                error={errors.city}
+              />
+              <InputField
+                icon={Building}
+                label="State"
+                name="state"
+                placeholder="State"
+                value={form.state}
+                onChange={handleChange}
+                error={errors.state}
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <InputField icon={MapPin} label="Pincode" name="pincode" placeholder="XXXXXX" />
+              <InputField
+                icon={MapPin}
+                label="Pincode"
+                name="pincode"
+                placeholder="XXXXXX"
+                value={form.pincode}
+                onChange={handleChange}
+                error={errors.pincode}
+              />
               <div className="space-y-1.5">
                 <Label htmlFor="country" className="text-sm font-medium text-gray-300 flex items-center gap-1.5">
                   <Globe className="h-3.5 w-3.5 text-purple-400" />
