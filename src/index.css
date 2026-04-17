@@ -17,7 +17,7 @@
     --background: 271 92% 85%;          /* #D6B4FC lavender */
     --foreground: 260 40% 18%;          /* deep violet-ink */
 
-    --card: 0 0% 100%;                  /* pure white cards */
+    --card: 60, 56%, 91%;                  /* pure white cards */
     --card-foreground: 260 40% 18%;
 
     --popover: 0 0% 100%;
