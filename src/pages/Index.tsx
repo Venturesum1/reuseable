@@ -69,7 +69,7 @@ function HeroBanner({ products }: { products: any[] }) {
   const slide = slides[current];
 
   return (
-    <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #1a0a2e 0%, #2d1060 50%, #0f0520 100%)" }}>
+    <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #089afc 0%, #2d1060 50%, #ff04f2 100%)" }}>
       <div className="container py-10 md:py-16">
         <div className="grid md:grid-cols-2 gap-8 items-center min-h-[320px]">
           <motion.div key={current} initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
@@ -264,14 +264,14 @@ export default function Index() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between min-h-[160px]"
-              style={{ background: "linear-gradient(135deg, rgba(214,180,252,0.2), rgba(214,180,252,0.05))", border: "1px solid rgba(214,180,252,0.2)" }}
+              style={{ background: "linear-gradient(135deg, rgba(88, 101, 0, 0.2), rgba(214,180,252,0.05))", border: "1px solid rgba(214,180,252,0.2)" }}
             >
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#d6b4fc" }}>Get Rewarded</span>
-                <h3 className="font-display text-xl font-bold text-white mt-1">Save Up <span style={{ color: "#d6b4fc" }}>50% Off</span></h3>
-                <p className="text-xs mt-1" style={{ color: "rgba(214,180,252,0.6)" }}>Best prices on the market!</p>
+                <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#3f0087" }}>Get Rewarded</span>
+                <h3 className="font-display text-xl font-bold text-white mt-1">Save Up <span style={{ color: "#4b3f59" }}>50% Off</span></h3>
+                <p className="text-xs mt-1" style={{ color: "rgba(37, 0, 79, 0.6)" }}>Best prices on the market!</p>
               </div>
-              <Button size="sm" className="mt-3 self-start rounded-full text-xs px-5 font-bold" style={{ backgroundColor: "#d6b4fc", color: "#1a0a2e" }}>
+              <Button size="sm" className="mt-3 self-start rounded-full text-xs px-5 font-bold" style={{ backgroundColor: "#b7d507", color: "#1a0a2e" }}>
                 Shop Now <ChevronRight className="ml-1 h-3 w-3" />
               </Button>
             </motion.div>
@@ -279,7 +279,7 @@ export default function Index() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
               className="relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between min-h-[160px]"
-              style={{ background: "linear-gradient(135deg, rgba(214,180,252,0.12), rgba(214,180,252,0.03))", border: "1px solid rgba(214,180,252,0.15)" }}
+              style={{ background: "linear-gradient(135deg, rgb(23, 0, 200), rgba(214,180,252,0.03))", border: "1px solid rgba(214,180,252,0.15)" }}
             >
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-white">New Arrivals</span>
@@ -289,7 +289,7 @@ export default function Index() {
               <Button
                 size="sm" variant="outline"
                 className="mt-3 self-start rounded-full text-xs px-5"
-                style={{ borderColor: "#d6b4fc", color: "#d6b4fc" }}
+                style={{ borderColor: "#d6b4fc", color: "#1e0e30" }}
               >
                 Explore <ChevronRight className="ml-1 h-3 w-3" />
               </Button>
@@ -298,7 +298,7 @@ export default function Index() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between min-h-[160px]"
-              style={{ background: "linear-gradient(135deg, rgba(74,222,170,0.15), rgba(74,222,170,0.03))", border: "1px solid rgba(74,222,170,0.2)" }}
+              style={{ background: "linear-gradient(135deg, rgb(255, 4, 213), rgba(74,222,170,0.03))", border: "1px solid rgba(74,222,170,0.2)" }}
             >
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-white">Top Seller</span>
@@ -308,7 +308,7 @@ export default function Index() {
               <Button
                 size="sm" variant="outline"
                 className="mt-3 self-start rounded-full text-xs px-5"
-                style={{ borderColor: "#4adeaa", color: "#4adeaa" }}
+                style={{ borderColor: "#4adeaa", color: "#00ffa6" }}
               >
                 Shop Now <ChevronRight className="ml-1 h-3 w-3" />
               </Button>
@@ -368,7 +368,7 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div
               className="md:col-span-1 rounded-2xl p-6 flex flex-col justify-center min-h-[120px]"
-              style={{ background: "linear-gradient(135deg, rgba(214,180,252,0.18), rgba(214,180,252,0.05))", border: "1px solid rgba(214,180,252,0.15)" }}
+              style={{ background: "linear-gradient(135deg, rgb(119, 0, 255), rgba(214,180,252,0.05))", border: "1px solid rgba(214,180,252,0.15)" }}
             >
               <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#d6b4fc" }}>Get Rewarded</span>
               <h3 className="font-display text-lg font-bold text-white mt-1">Super Cheap Prices</h3>
@@ -377,7 +377,7 @@ export default function Index() {
                 Shop Now <ChevronRight className="ml-1 h-3 w-3" />
               </Button>
             </div>
-            <div className="rounded-2xl p-6 flex items-center gap-4" style={{ backgroundColor: "rgba(214,180,252,0.08)", border: "1px solid rgba(214,180,252,0.15)" }}>
+            <div className="rounded-2xl p-6 flex items-center gap-4" style={{ backgroundColor: "rgb(119, 0, 255)", border: "1px solid rgba(214,180,252,0.15)" }}>
               <div className="flex-1">
                 <p className="text-xs" style={{ color: "rgba(214,180,252,0.6)" }}>Starting At</p>
                 <p className="font-display text-2xl font-bold mt-1" style={{ color: "#d6b4fc" }}>₹999</p>
@@ -385,7 +385,7 @@ export default function Index() {
               </div>
               <Zap className="h-12 w-12" style={{ color: "rgba(214,180,252,0.2)" }} />
             </div>
-            <div className="rounded-2xl p-6 flex items-center gap-4" style={{ backgroundColor: "rgba(214,180,252,0.08)", border: "1px solid rgba(214,180,252,0.15)" }}>
+            <div className="rounded-2xl p-6 flex items-center gap-4" style={{ backgroundColor: "rgb(255, 42, 0)", border: "1px solid rgba(214,180,252,0.15)" }}>
               <div className="flex-1">
                 <p className="text-xs" style={{ color: "rgba(214,180,252,0.6)" }}>Limited Offer</p>
                 <p className="font-display text-2xl font-bold mt-1" style={{ color: "#d6b4fc" }}>30% Off</p>
@@ -491,15 +491,15 @@ export default function Index() {
 
       {/* Bottom Promo Banner */}
       {!search && (
-        <section style={{ background: "linear-gradient(90deg, rgba(214,180,252,0.12), rgba(214,180,252,0.04), rgba(74,222,170,0.08))", borderTop: "1px solid rgba(214,180,252,0.15)" }}>
+        <section style={{ background: "linear-gradient(90deg, rgb(49, 0, 106), rgb(252, 180, 180), rgb(0, 255, 166))", borderTop: "1px solid rgba(214,180,252,0.15)" }}>
           <div className="container py-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#d6b4fc" }}>New Collection</span>
               <h3 className="font-display text-3xl md:text-4xl font-bold text-white mt-2">
-                Up to <span style={{ color: "#d6b4fc" }}>30% Off</span>
+                Up to <span style={{ color: "#7700ff" }}>30% Off</span>
               </h3>
               <p className="text-lg text-white font-semibold">Instant Discount</p>
-              <p className="text-sm mt-1" style={{ color: "rgba(214,180,252,0.6)" }}>Applicable on all categories. Limited time only.</p>
+              <p className="text-sm mt-1" style={{ color: "rgb(119, 0, 255)" }}>Applicable on all categories. Limited time only.</p>
             </div>
             <Button
               size="lg"
@@ -513,7 +513,7 @@ export default function Index() {
       )}
 
       {/* Trust Badges */}
-      <section style={{ borderTop: "1px solid rgba(214,180,252,0.15)", backgroundColor: "rgba(214,180,252,0.04)" }}>
+      <section style={{ borderTop: "1px solid rgb(214, 180, 252))", backgroundColor: "rgba(214,180,252,0.04)" }}>
         <div className="container py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
@@ -540,7 +540,7 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer style={{ borderTop: "1px solid rgba(214,180,252,0.15)", backgroundColor: "rgba(214,180,252,0.04)" }}>
+      <footer style={{ borderTop: "1px solid rgb(214, 180, 252)", backgroundColor: "rgb(0, 31, 64)" }}>
         <div className="container py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>

@@ -21,7 +21,7 @@ export default function Payment() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f1117]">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -30,56 +30,54 @@ export default function Payment() {
         className="container max-w-2xl py-8 px-4"
       >
         <div className="text-center mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-white">Choose <span className="text-purple-400">Payment</span> Method</h1>
-          <p className="text-gray-400 text-sm mt-1">Select how you'd like to pay for your order</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Choose <span className="text-cyan-700">Payment</span> Method</h1>
+          <p className="text-gray-700 text-sm mt-1">Select how you'd like to pay for your order</p>
         </div>
 
-        {/* Order Summary */}
         {order && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1 }}
-            className="mb-8 rounded-xl border border-[#2a2d3e] bg-[#151823] p-4"
+            className="mb-8 rounded-xl border-2 border-white bg-white p-4 shadow-lg"
           >
             <div className="flex items-center gap-3 mb-3">
-              <Package className="h-5 w-5 text-purple-400" />
-              <h3 className="font-semibold text-white">Order Summary</h3>
+              <Package className="h-5 w-5 text-cyan-600" />
+              <h3 className="font-bold text-gray-900">Order Summary</h3>
             </div>
             <div className="space-y-2 text-sm">
-              <div className="flex justify-between"><span className="text-gray-400">Product</span><span className="text-white font-medium">{order.product_name}</span></div>
-              <div className="flex justify-between"><span className="text-gray-400">Quantity</span><span className="text-white">{order.quantity}</span></div>
-              <div className="flex justify-between"><span className="text-gray-400">Delivery</span><span className="text-gray-300 text-xs flex items-center gap-1"><MapPin className="h-3 w-3" />{order.city}, {order.state}</span></div>
-              <div className="flex justify-between border-t border-[#2a2d3e] pt-2 mt-2">
-                <span className="text-white font-semibold">Total Amount</span>
-                <span className="text-xl font-bold text-yellow-400">₹{Number(order.total_price).toLocaleString()}</span>
+              <div className="flex justify-between"><span className="text-gray-600">Product</span><span className="text-gray-900 font-medium">{order.product_name}</span></div>
+              <div className="flex justify-between"><span className="text-gray-600">Quantity</span><span className="text-gray-900">{order.quantity}</span></div>
+              <div className="flex justify-between"><span className="text-gray-600">Delivery</span><span className="text-gray-700 text-xs flex items-center gap-1"><MapPin className="h-3 w-3" />{order.city}, {order.state}</span></div>
+              <div className="flex justify-between border-t border-gray-200 pt-2 mt-2">
+                <span className="text-gray-900 font-bold">Total Amount</span>
+                <span className="text-xl font-bold text-yellow-600">₹{Number(order.total_price).toLocaleString()}</span>
               </div>
             </div>
           </motion.div>
         )}
 
-        {/* Payment Options */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
             onClick={() => setSelected("cod")}
-            className={`cursor-pointer rounded-2xl border-2 p-6 transition-all duration-300 ${
+            className={`cursor-pointer rounded-2xl border-2 p-6 transition-all duration-300 bg-white ${
               selected === "cod"
-                ? "border-yellow-400 bg-yellow-400/10 shadow-lg shadow-yellow-400/10"
-                : "border-[#2a2d3e] bg-[#151823] hover:border-yellow-400/50 hover:shadow-lg hover:shadow-yellow-400/5"
+                ? "border-yellow-400 shadow-lg shadow-yellow-400/40"
+                : "border-white hover:border-yellow-300 hover:shadow-lg"
             }`}
           >
             <div className="flex flex-col items-center text-center gap-3">
-              <div className={`flex h-16 w-16 items-center justify-center rounded-2xl transition-all ${selected === "cod" ? "bg-yellow-400/20" : "bg-[#1a1d2e]"}`}>
-                <Truck className={`h-8 w-8 ${selected === "cod" ? "text-yellow-400" : "text-gray-400"}`} />
+              <div className={`flex h-16 w-16 items-center justify-center rounded-2xl transition-all ${selected === "cod" ? "bg-yellow-100" : "bg-gray-50"}`}>
+                <Truck className={`h-8 w-8 ${selected === "cod" ? "text-yellow-600" : "text-gray-500"}`} />
               </div>
-              <h3 className={`text-lg font-bold ${selected === "cod" ? "text-yellow-400" : "text-white"}`}>Cash on Delivery</h3>
-              <p className="text-xs text-gray-400">Pay when your order arrives at your doorstep. No advance payment needed.</p>
+              <h3 className={`text-lg font-bold ${selected === "cod" ? "text-yellow-700" : "text-gray-900"}`}>Cash on Delivery</h3>
+              <p className="text-xs text-gray-600">Pay when your order arrives at your doorstep. No advance payment needed.</p>
               {selected === "cod" && (
                 <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-yellow-400">
-                  <span className="text-black text-sm font-bold">✓</span>
+                  <span className="text-white text-sm font-bold">✓</span>
                 </motion.div>
               )}
             </div>
@@ -90,20 +88,20 @@ export default function Payment() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
             onClick={() => setSelected("online")}
-            className={`cursor-pointer rounded-2xl border-2 p-6 transition-all duration-300 ${
+            className={`cursor-pointer rounded-2xl border-2 p-6 transition-all duration-300 bg-white ${
               selected === "online"
-                ? "border-purple-500 bg-purple-500/10 shadow-lg shadow-purple-500/10"
-                : "border-[#2a2d3e] bg-[#151823] hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/5"
+                ? "border-cyan-400 shadow-lg shadow-cyan-400/40"
+                : "border-white hover:border-cyan-300 hover:shadow-lg"
             }`}
           >
             <div className="flex flex-col items-center text-center gap-3">
-              <div className={`flex h-16 w-16 items-center justify-center rounded-2xl transition-all ${selected === "online" ? "bg-purple-500/20" : "bg-[#1a1d2e]"}`}>
-                <CreditCard className={`h-8 w-8 ${selected === "online" ? "text-purple-400" : "text-gray-400"}`} />
+              <div className={`flex h-16 w-16 items-center justify-center rounded-2xl transition-all ${selected === "online" ? "bg-cyan-100" : "bg-gray-50"}`}>
+                <CreditCard className={`h-8 w-8 ${selected === "online" ? "text-cyan-600" : "text-gray-500"}`} />
               </div>
-              <h3 className={`text-lg font-bold ${selected === "online" ? "text-purple-400" : "text-white"}`}>Online Payment</h3>
-              <p className="text-xs text-gray-400">Pay instantly via UPI, Google Pay, PhonePe, or scan QR code.</p>
+              <h3 className={`text-lg font-bold ${selected === "online" ? "text-cyan-700" : "text-gray-900"}`}>Online Payment</h3>
+              <p className="text-xs text-gray-600">Pay instantly via UPI, Google Pay, PhonePe, or scan QR code.</p>
               {selected === "online" && (
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-purple-500">
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-cyan-500">
                   <span className="text-white text-sm font-bold">✓</span>
                 </motion.div>
               )}
@@ -114,10 +112,10 @@ export default function Payment() {
         <Button
           onClick={handleContinue}
           disabled={!selected}
-          className={`w-full h-12 text-base font-semibold transition-all duration-300 ${
+          className={`w-full h-12 text-base font-bold transition-all duration-300 ${
             selected
-              ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
-              : "bg-[#1a1d2e] text-gray-500 cursor-not-allowed"
+              ? "bg-gradient-to-r from-yellow-400 to-cyan-500 hover:from-yellow-500 hover:to-cyan-600 text-white shadow-lg shadow-cyan-400/40 hover:shadow-cyan-500/60"
+              : "bg-white/60 text-gray-500 cursor-not-allowed"
           }`}
         >
           {selected ? (

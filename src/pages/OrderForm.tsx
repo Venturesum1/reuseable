@@ -12,12 +12,25 @@ import { motion } from "framer-motion";
 
 const COUNTRIES = ["India", "United States", "United Kingdom", "Canada", "Australia", "Germany", "France", "Japan", "Singapore", "UAE"];
 
-// ✅ Moved OUTSIDE OrderForm to prevent remount on every render
-const InputField = ({ icon: Icon, label, name, type = "text", required = true, placeholder, value, onChange, error }: any) => (
+type FieldProps = {
+  icon: any;
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+  value: string;
+  error?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+// IMPORTANT: defined OUTSIDE the component to keep stable identity across renders
+// (otherwise inputs lose focus after every keystroke).
+const Field = ({ icon: Icon, label, name, type = "text", required = true, placeholder, value, error, onChange }: FieldProps) => (
   <div className="space-y-1.5">
-    <Label htmlFor={name} className="text-sm font-medium text-gray-300 flex items-center gap-1.5">
-      <Icon className="h-3.5 w-3.5 text-purple-400" />
-      {label} {required && <span className="text-red-400">*</span>}
+    <Label htmlFor={name} className="text-sm font-semibold text-gray-800 flex items-center gap-1.5">
+      <Icon className="h-3.5 w-3.5 text-cyan-600" />
+      {label} {required && <span className="text-red-500">*</span>}
     </Label>
     <Input
       id={name}
@@ -26,9 +39,9 @@ const InputField = ({ icon: Icon, label, name, type = "text", required = true, p
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={`bg-[#1a1d2e] border-[#2a2d3e] text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500/20 transition-all ${error ? 'border-red-500 ring-1 ring-red-500/20' : ''}`}
+      className={`bg-white border-2 text-gray-900 placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-cyan-400 transition-all ${error ? 'border-red-400 ring-1 ring-red-300' : 'border-gray-200 focus:border-cyan-500'}`}
     />
-    {error && <p className="text-xs text-red-400 mt-0.5">{error}</p>}
+    {error && <p className="text-xs text-red-500 mt-0.5">{error}</p>}
   </div>
 );
 
@@ -112,14 +125,14 @@ export default function OrderForm() {
   };
 
   if (!product) return (
-    <div className="min-h-screen bg-[#0f1117]">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="flex justify-center py-40"><Loader2 className="h-8 w-8 animate-spin text-purple-400" /></div>
+      <div className="flex justify-center py-40"><Loader2 className="h-8 w-8 animate-spin text-cyan-600" /></div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#0f1117]">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -128,8 +141,8 @@ export default function OrderForm() {
         className="container max-w-2xl py-8 px-4"
       >
         <div className="text-center mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-white">Shipping <span className="text-purple-400">Details</span></h1>
-          <p className="text-gray-400 text-sm mt-1">Complete your shipping address to continue</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Shipping <span className="text-cyan-700">Details</span></h1>
+          <p className="text-gray-700 text-sm mt-1">Complete your shipping address to continue</p>
         </div>
 
         {/* Product Info Box */}
@@ -137,20 +150,20 @@ export default function OrderForm() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="mb-6 rounded-xl border border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-blue-900/20 p-4 backdrop-blur"
+          className="mb-6 rounded-xl border-2 border-yellow-300 bg-gradient-to-r from-yellow-100 to-cyan-100 p-4 shadow-md"
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/20">
-              <Package className="h-6 w-6 text-purple-400" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-cyan-500/20">
+              <Package className="h-6 w-6 text-cyan-700" />
             </div>
             <div className="flex-1">
-              <p className="text-xs text-purple-300 font-medium">Product</p>
-              <p className="font-semibold text-white">{product.name}</p>
-              <p className="text-xs text-gray-400 font-mono">ID: {product.id.slice(0, 8)}</p>
+              <p className="text-xs text-cyan-700 font-medium">Product</p>
+              <p className="font-semibold text-gray-900">{product.name}</p>
+              <p className="text-xs text-gray-600 font-mono">ID: {product.id.slice(0, 8)}</p>
             </div>
             <div className="text-right">
-              <p className="text-xs text-gray-400">Unit Price</p>
-              <p className="text-lg font-bold text-yellow-400">₹{Number(product.price).toLocaleString()}</p>
+              <p className="text-xs text-gray-700">Unit Price</p>
+              <p className="text-lg font-bold text-yellow-600">₹{Number(product.price).toLocaleString()}</p>
             </div>
           </div>
         </motion.div>
@@ -160,131 +173,62 @@ export default function OrderForm() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="rounded-2xl border border-[#2a2d3e] bg-[#151823] p-6 shadow-2xl"
+          className="rounded-2xl border-2 border-white bg-white p-6 shadow-2xl"
         >
           {/* Quantity Selector */}
-          <div className="flex items-center justify-between mb-6 p-4 rounded-xl bg-[#1a1d2e] border border-[#2a2d3e]">
+          <div className="flex items-center justify-between mb-6 p-4 rounded-xl bg-cyan-50 border-2 border-cyan-200">
             <div>
-              <p className="text-sm text-gray-400">Quantity</p>
+              <p className="text-sm text-gray-700 font-medium">Quantity</p>
             </div>
             <div className="flex items-center gap-3">
-              <Button type="button" variant="outline" size="icon" className="h-8 w-8 border-[#2a2d3e] bg-[#0f1117] text-white hover:bg-purple-500/20 hover:border-purple-500/50" disabled={quantity <= 1} onClick={() => setQuantity(q => Math.max(1, q - 1))}>
+              <Button type="button" variant="outline" size="icon" className="h-8 w-8 border-cyan-300 bg-white text-cyan-700 hover:bg-cyan-100" disabled={quantity <= 1} onClick={() => setQuantity(q => Math.max(1, q - 1))}>
                 <Minus className="h-3 w-3" />
               </Button>
-              <span className="min-w-[2rem] text-center font-bold text-white text-lg">{quantity}</span>
-              <Button type="button" variant="outline" size="icon" className="h-8 w-8 border-[#2a2d3e] bg-[#0f1117] text-white hover:bg-purple-500/20 hover:border-purple-500/50" disabled={quantity >= maxQty} onClick={() => setQuantity(q => Math.min(maxQty, q + 1))}>
+              <span className="min-w-[2rem] text-center font-bold text-gray-900 text-lg">{quantity}</span>
+              <Button type="button" variant="outline" size="icon" className="h-8 w-8 border-cyan-300 bg-white text-cyan-700 hover:bg-cyan-100" disabled={quantity >= maxQty} onClick={() => setQuantity(q => Math.min(maxQty, q + 1))}>
                 <Plus className="h-3 w-3" />
               </Button>
             </div>
             <div className="text-right">
-              <p className="text-xs text-gray-400">Total</p>
-              <p className="text-xl font-bold text-yellow-400">₹{totalPrice.toLocaleString()}</p>
+              <p className="text-xs text-gray-600">Total</p>
+              <p className="text-xl font-bold text-yellow-600">₹{totalPrice.toLocaleString()}</p>
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex items-center gap-2 mb-2">
-              <MapPin className="h-4 w-4 text-purple-400" />
-              <h2 className="text-sm font-semibold text-white uppercase tracking-wider">Delivery Address</h2>
+              <MapPin className="h-4 w-4 text-cyan-600" />
+              <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Delivery Address</h2>
             </div>
 
-            <InputField
-              icon={User}
-              label="Full Name"
-              name="full_name"
-              placeholder="Enter your full name"
-              value={form.full_name}
-              onChange={handleChange}
-              error={errors.full_name}
-            />
+            <Field icon={User} label="Full Name" name="full_name" placeholder="Enter your full name" value={form.full_name} error={errors.full_name} onChange={handleChange} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <InputField
-                icon={Phone}
-                label="Mobile Number"
-                name="phone"
-                type="tel"
-                placeholder="+91 XXXXX XXXXX"
-                value={form.phone}
-                onChange={handleChange}
-                error={errors.phone}
-              />
-              <InputField
-                icon={Mail}
-                label="Email Address"
-                name="email"
-                type="email"
-                required={false}
-                placeholder="your@email.com"
-                value={form.email}
-                onChange={handleChange}
-                error={errors.email}
-              />
+              <Field icon={Phone} label="Mobile Number" name="phone" type="tel" placeholder="+91 XXXXX XXXXX" value={form.phone} error={errors.phone} onChange={handleChange} />
+              <Field icon={Mail} label="Email Address" name="email" type="email" required={false} placeholder="your@email.com" value={form.email} error={errors.email} onChange={handleChange} />
             </div>
 
-            <InputField
-              icon={Home}
-              label="House No. & Street"
-              name="address"
-              placeholder="House no, Building, Street"
-              value={form.address}
-              onChange={handleChange}
-              error={errors.address}
-            />
-
-            <InputField
-              icon={MapPinned}
-              label="Landmark"
-              name="landmark"
-              required={false}
-              placeholder="Near..."
-              value={form.landmark}
-              onChange={handleChange}
-              error={errors.landmark}
-            />
+            <Field icon={Home} label="House No. & Street" name="address" placeholder="House no, Building, Street" value={form.address} error={errors.address} onChange={handleChange} />
+            <Field icon={MapPinned} label="Landmark" name="landmark" required={false} placeholder="Near..." value={form.landmark} error={errors.landmark} onChange={handleChange} />
 
             <div className="grid grid-cols-2 gap-4">
-              <InputField
-                icon={Building}
-                label="City"
-                name="city"
-                placeholder="City"
-                value={form.city}
-                onChange={handleChange}
-                error={errors.city}
-              />
-              <InputField
-                icon={Building}
-                label="State"
-                name="state"
-                placeholder="State"
-                value={form.state}
-                onChange={handleChange}
-                error={errors.state}
-              />
+              <Field icon={Building} label="City" name="city" placeholder="City" value={form.city} error={errors.city} onChange={handleChange} />
+              <Field icon={Building} label="State" name="state" placeholder="State" value={form.state} error={errors.state} onChange={handleChange} />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <InputField
-                icon={MapPin}
-                label="Pincode"
-                name="pincode"
-                placeholder="XXXXXX"
-                value={form.pincode}
-                onChange={handleChange}
-                error={errors.pincode}
-              />
+              <Field icon={MapPin} label="Pincode" name="pincode" placeholder="XXXXXX" value={form.pincode} error={errors.pincode} onChange={handleChange} />
               <div className="space-y-1.5">
-                <Label htmlFor="country" className="text-sm font-medium text-gray-300 flex items-center gap-1.5">
-                  <Globe className="h-3.5 w-3.5 text-purple-400" />
-                  Country <span className="text-red-400">*</span>
+                <Label htmlFor="country" className="text-sm font-semibold text-gray-800 flex items-center gap-1.5">
+                  <Globe className="h-3.5 w-3.5 text-cyan-600" />
+                  Country <span className="text-red-500">*</span>
                 </Label>
                 <select
                   id="country"
                   name="country"
                   value={form.country}
                   onChange={handleChange}
-                  className="flex h-10 w-full rounded-md border border-[#2a2d3e] bg-[#1a1d2e] px-3 py-2 text-sm text-white focus:border-purple-500 focus:ring-purple-500/20 focus:outline-none"
+                  className="flex h-10 w-full rounded-md border-2 border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 >
                   {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
@@ -293,7 +237,7 @@ export default function OrderForm() {
 
             <Button
               type="submit"
-              className="w-full mt-6 h-12 text-base font-semibold bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-300"
+              className="w-full mt-6 h-12 text-base font-bold bg-gradient-to-r from-yellow-400 to-cyan-500 hover:from-yellow-500 hover:to-cyan-600 text-white shadow-lg shadow-cyan-400/40 hover:shadow-cyan-500/60 transition-all duration-300"
               disabled={loading}
             >
               {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : null}

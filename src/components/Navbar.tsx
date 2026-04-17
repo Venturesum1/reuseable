@@ -32,9 +32,9 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-xl shadow-lg">
+    <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-xl shadow-soft">
       {/* Top bar */}
-      <div className="bg-primary/10 border-b border-border">
+      <div className="bg-gradient-to-r from-primary/15 via-accent/15 to-primary/15 border-b border-border">
         <div className="container flex h-8 items-center justify-between text-xs text-muted-foreground">
           <span className="flex items-center gap-1">🚚 Free shipping on orders over ₹999</span>
           <div className="hidden sm:flex items-center gap-4">
@@ -47,10 +47,10 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
       {/* Main nav */}
       <div className="container flex h-16 items-center gap-4">
         <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold text-foreground shrink-0">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-white shadow-md">
             <Store className="h-5 w-5" />
           </div>
-          <span className="hidden sm:inline">Reseller<span className="text-accent">Hub</span></span>
+          <span className="hidden sm:inline">Reseller<span className="text-primary">Hub</span></span>
         </Link>
 
         {/* Search bar */}
