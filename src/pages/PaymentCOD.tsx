@@ -120,9 +120,14 @@ export default function PaymentCOD() {
                 <div className="flex justify-between border-t border-cyan-200 pt-2"><span className="text-gray-900 font-semibold">Total</span><span className="text-yellow-600 font-bold text-lg">₹{Number(order.total_price).toLocaleString()}</span></div>
               </div>
 
-              <Button asChild className="w-full h-12 bg-gradient-to-r from-yellow-400 to-cyan-500 hover:from-yellow-500 hover:to-cyan-600 text-white font-bold">
-                <Link to="/"><Home className="mr-2 h-4 w-4" /> Continue Shopping</Link>
-              </Button>
+              <div className="grid gap-2">
+                <Button asChild className="w-full h-12 bg-gradient-to-r from-yellow-400 to-cyan-500 hover:from-yellow-500 hover:to-cyan-600 text-white font-bold">
+                  <Link to={`/track/${orderId}`}>Track Your Order</Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full h-11">
+                  <Link to="/"><Home className="mr-2 h-4 w-4" /> Continue Shopping</Link>
+                </Button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

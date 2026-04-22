@@ -18,8 +18,9 @@ interface Props {
 export default function ProductCard({ id, name, shortDescription, price, images, stock }: Props) {
   const [wishlisted, setWishlisted] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [imgFailed, setImgFailed] = useState(!images?.[0]);
   const { toast } = useToast();
-  const image = images?.[0] || "/placeholder.svg";
+  const image = images?.[0] || "";
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -58,12 +59,21 @@ export default function ProductCard({ id, name, shortDescription, price, images,
         <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 hover:border-primary/30">
           {/* Image */}
           <div className="relative aspect-square overflow-hidden bg-muted/20">
-            <img
-              src={image}
-              alt={name}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-
+            {!imgFailed ? (
+              <img
+                src={image}
+                alt={name}
+                loading="lazy"
+                onError={() => setImgFailed(true)}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/15 via-muted/40 to-accent/15 p-4 text-center">
+                <span className="font-display text-base sm:text-lg font-bold text-foreground line-clamp-4 leading-tight">
+                  {name}
+                </span>
+              </div>
+            )}
             {/* Stock badge */}
             {stock <= 0 && (
               <div className="absolute inset-0 bg-background/60 flex items-center justify-center backdrop-blur-sm">

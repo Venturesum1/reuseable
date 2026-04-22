@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart, Heart, Store, Search, Menu, X } from "lucide-react";
+import { ShoppingCart, Heart, Store, Search, Menu, X, Package } from "lucide-react";
 import { getCart } from "@/lib/cart";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -68,6 +68,10 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
 
         {/* Right actions */}
         <nav className="flex items-center gap-1 sm:gap-2 shrink-0">
+          <Link to="/orders" className="relative hidden sm:flex flex-col items-center rounded-lg p-2 transition-colors hover:bg-muted group">
+            <Package className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            <span className="text-[10px] text-muted-foreground mt-0.5">Orders</span>
+          </Link>
           <Link to="/wishlist" className="relative flex flex-col items-center rounded-lg p-2 transition-colors hover:bg-muted group">
             <Heart className="h-5 w-5 text-muted-foreground group-hover:text-peach transition-colors" />
             <span className="text-[10px] text-muted-foreground hidden sm:block mt-0.5">Wishlist</span>
@@ -96,6 +100,9 @@ export default function Navbar({ onSearch, searchValue }: NavbarProps) {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="sm:hidden border-t border-border bg-card p-4 space-y-2">
+          <Link to="/orders" className="block rounded-lg px-4 py-2 hover:bg-muted text-sm text-foreground" onClick={() => setMobileMenuOpen(false)}>
+            📦 My Orders
+          </Link>
           <Link to="/wishlist" className="block rounded-lg px-4 py-2 hover:bg-muted text-sm text-foreground" onClick={() => setMobileMenuOpen(false)}>
             ❤️ Wishlist
           </Link>

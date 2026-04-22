@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useParams, useLocation, Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ const UPI_APPS = [
 export default function PaymentOnline() {
   const { orderId } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const { order } = (location.state || {}) as any;
   const { toast } = useToast();
   const [upiId, setUpiId] = useState("");
@@ -71,10 +72,23 @@ export default function PaymentOnline() {
   };
 
   const markAsPaid = async () => {
+    const trimmedRef = txnRef.trim();
+    if (trimmedRef.length < 6) {
+      toast({
+        title: "Transaction Reference Required",
+        description: "Please enter the UTR / Transaction ID from your UPI app (min 6 characters). This prevents fraud.",
+        variant: "destructive",
+      });
+      return;
+    }
     setLoading(true);
     const { error } = await supabase
       .from("orders")
-      .update({ payment_method: "Online", payment_status: "completed" } as any)
+      .update({
+        payment_method: "Online",
+        payment_status: "verifying",
+        transaction_ref: trimmedRef,
+      } as any)
       .eq("id", orderId!);
 
     if (error) {
@@ -84,6 +98,7 @@ export default function PaymentOnline() {
     }
     setPaid(true);
     setLoading(false);
+    toast({ title: "UTR submitted", description: "Our admin will verify your payment shortly." });
   };
 
   if (!order) {
@@ -212,20 +227,23 @@ export default function PaymentOnline() {
                 transition={{ delay: 0.4 }}
                 className="rounded-2xl border-2 border-yellow-300 bg-gradient-to-br from-yellow-50 to-white p-5 shadow-md"
               >
-                <p className="text-sm text-gray-700 mb-3 font-medium">After completing payment, enter the transaction reference (optional) and confirm:</p>
+                <p className="text-sm text-gray-700 mb-3 font-medium">
+                  After paying, enter the <span className="text-cyan-700 font-bold">UTR / Transaction ID</span> from your UPI app to confirm. <span className="text-red-600">This is required</span> to prevent fraud.
+                </p>
                 <Input
                   value={txnRef}
                   onChange={e => setTxnRef(e.target.value)}
-                  placeholder="Transaction Reference / UTR (optional)"
+                  placeholder="UTR / Transaction Reference (required)"
+                  required
                   className="bg-white border-2 border-yellow-200 text-gray-900 placeholder:text-gray-400 focus:border-yellow-400 mb-3"
                 />
                 <Button
                   onClick={markAsPaid}
-                  disabled={loading}
-                  className="w-full h-12 text-base font-bold bg-gradient-to-r from-yellow-400 to-cyan-500 hover:from-yellow-500 hover:to-cyan-600 text-white shadow-lg shadow-cyan-400/40 hover:shadow-cyan-500/60 transition-all duration-300"
+                  disabled={loading || txnRef.trim().length < 6}
+                  className="w-full h-12 text-base font-bold bg-gradient-to-r from-yellow-400 to-cyan-500 hover:from-yellow-500 hover:to-cyan-600 text-white shadow-lg shadow-cyan-400/40 hover:shadow-cyan-500/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <CheckCircle className="mr-2 h-5 w-5" />}
-                  I've Completed Payment
+                  Confirm Payment
                 </Button>
               </motion.div>
             </motion.div>
@@ -246,21 +264,27 @@ export default function PaymentOnline() {
                 <CheckCircle className="h-14 w-14 text-cyan-600" />
               </motion.div>
 
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">Payment <span className="text-cyan-600">Successful!</span></h1>
-              <p className="text-gray-600 text-sm mb-1">Your order has been confirmed.</p>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">UTR <span className="text-cyan-600">Submitted!</span></h1>
+              <p className="text-gray-700 text-sm mb-1">Your payment is now under verification by our admin team.</p>
+              <p className="text-xs text-orange-700 bg-orange-50 border border-orange-200 rounded-lg p-2 mt-2 mb-2">⏳ Order will be confirmed only after admin verifies your transaction.</p>
               <p className="text-xs text-gray-500 font-mono mb-6">Order ID: #{orderId?.slice(0, 8)}</p>
 
               <div className="space-y-2 text-sm mb-8 p-4 rounded-xl bg-cyan-50 border border-cyan-100">
                 <div className="flex justify-between"><span className="text-gray-600">Product</span><span className="text-gray-900">{order.product_name}</span></div>
                 <div className="flex justify-between"><span className="text-gray-600">Qty</span><span className="text-gray-900">{order.quantity}</span></div>
-                <div className="flex justify-between"><span className="text-gray-600">Payment</span><span className="text-cyan-700 font-semibold">Online (UPI)</span></div>
-                {txnRef && <div className="flex justify-between"><span className="text-gray-600">Ref</span><span className="text-gray-900 font-mono text-xs">{txnRef}</span></div>}
-                <div className="flex justify-between border-t border-cyan-200 pt-2"><span className="text-gray-900 font-bold">Total Paid</span><span className="text-yellow-600 font-bold text-lg">₹{Number(order.total_price).toLocaleString()}</span></div>
+                <div className="flex justify-between"><span className="text-gray-600">Payment</span><span className="text-orange-700 font-semibold">Verifying (UPI)</span></div>
+                {txnRef && <div className="flex justify-between"><span className="text-gray-600">UTR</span><span className="text-gray-900 font-mono text-xs">{txnRef}</span></div>}
+                <div className="flex justify-between border-t border-cyan-200 pt-2"><span className="text-gray-900 font-bold">Amount Paid</span><span className="text-yellow-600 font-bold text-lg">₹{Number(order.total_price).toLocaleString()}</span></div>
               </div>
 
-              <Button asChild className="w-full h-12 bg-gradient-to-r from-yellow-400 to-cyan-500 hover:from-yellow-500 hover:to-cyan-600 text-white font-bold">
-                <Link to="/"><Home className="mr-2 h-4 w-4" /> Continue Shopping</Link>
-              </Button>
+              <div className="grid gap-2">
+                <Button asChild className="w-full h-12 bg-gradient-to-r from-yellow-400 to-cyan-500 hover:from-yellow-500 hover:to-cyan-600 text-white font-bold">
+                  <Link to={`/track/${orderId}`}>Track Your Order</Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full h-11">
+                  <Link to="/"><Home className="mr-2 h-4 w-4" /> Continue Shopping</Link>
+                </Button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

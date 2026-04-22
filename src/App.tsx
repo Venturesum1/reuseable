@@ -9,6 +9,8 @@ import OrderForm from "./pages/OrderForm";
 import Payment from "./pages/Payment";
 import PaymentCOD from "./pages/PaymentCOD";
 import PaymentOnline from "./pages/PaymentOnline";
+import OrderTracking from "./pages/OrderTracking";
+import MyOrders from "./pages/MyOrders";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import AdminLogin from "./pages/AdminLogin";
@@ -17,6 +19,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminProducts from "./pages/AdminProducts";
 import AdminOrders from "./pages/AdminOrders";
 import NotFound from "./pages/NotFound";
+import BubbleClickEffect from "./components/BubbleClickEffect";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +28,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <BubbleClickEffect />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
@@ -33,6 +37,8 @@ const App = () => (
           <Route path="/payment/:orderId" element={<Payment />} />
           <Route path="/payment/:orderId/cod" element={<PaymentCOD />} />
           <Route path="/payment/:orderId/online" element={<PaymentOnline />} />
+          <Route path="/track/:orderId" element={<OrderTracking />} />
+          <Route path="/orders" element={<MyOrders />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/admin" element={<AdminLogin />} />

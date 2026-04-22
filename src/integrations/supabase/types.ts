@@ -35,6 +35,7 @@ export type Database = {
       orders: {
         Row: {
           address: string
+          cancel_reason: string | null
           city: string
           country: string
           created_at: string
@@ -42,6 +43,7 @@ export type Database = {
           full_name: string
           id: string
           is_confirmed: boolean
+          order_status: string
           payment_method: string
           payment_status: string
           phone: string
@@ -50,10 +52,13 @@ export type Database = {
           product_name: string
           quantity: number
           state: string
+          status_updated_at: string
           total_price: number
+          transaction_ref: string | null
         }
         Insert: {
           address: string
+          cancel_reason?: string | null
           city: string
           country?: string
           created_at?: string
@@ -61,6 +66,7 @@ export type Database = {
           full_name: string
           id?: string
           is_confirmed?: boolean
+          order_status?: string
           payment_method?: string
           payment_status?: string
           phone: string
@@ -69,10 +75,13 @@ export type Database = {
           product_name: string
           quantity?: number
           state: string
+          status_updated_at?: string
           total_price: number
+          transaction_ref?: string | null
         }
         Update: {
           address?: string
+          cancel_reason?: string | null
           city?: string
           country?: string
           created_at?: string
@@ -80,6 +89,7 @@ export type Database = {
           full_name?: string
           id?: string
           is_confirmed?: boolean
+          order_status?: string
           payment_method?: string
           payment_status?: string
           phone?: string
@@ -88,7 +98,9 @@ export type Database = {
           product_name?: string
           quantity?: number
           state?: string
+          status_updated_at?: string
           total_price?: number
+          transaction_ref?: string | null
         }
         Relationships: [
           {

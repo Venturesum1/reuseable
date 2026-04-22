@@ -115,4 +115,71 @@
   .glow-gold {
     box-shadow: 0 0 20px hsl(40 85% 60% / 0.3), 0 0 40px hsl(40 85% 60% / 0.1);
   }
+    /* ========================================================
+     Bubble click effect (BubbleClickEffect.tsx)
+     ======================================================== */
+  .lv-ripple {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    transform: translate(-50%, -50%) scale(0);
+    border: 2px solid hsl(var(--primary) / 0.6);
+    background: hsl(var(--primary) / 0.15);
+    animation: lv-ripple 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: transform, opacity;
+  }
+  .lv-bubble {
+    position: absolute;
+    border-radius: 9999px;
+    transform: translate(-50%, -50%);
+    opacity: 0.85;
+    filter: blur(0.3px);
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.4);
+    animation: lv-bubble 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: transform, opacity;
+  }
+  @keyframes lv-ripple {
+    0%   { transform: translate(-50%, -50%) scale(0);  opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
+  }
+  @keyframes lv-bubble {
+    0%   { transform: translate(-50%, -50%) translate(0, 0) scale(0.4); opacity: 0; }
+    20%  { opacity: 0.95; }
+    100% { transform: translate(-50%, -50%) translate(var(--dx, 0), var(--dy, -80px)) scale(1); opacity: 0; }
+  }
+  /* ========================================================
+     Scroll reveal animations (Reveal.tsx)
+     ======================================================== */
+  .reveal {
+    opacity: 0;
+    transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-fade-up    { transform: translateY(36px); }
+  .reveal-fade       { transform: none; }
+  .reveal-zoom       { transform: scale(0.92); }
+  .reveal-slide-left { transform: translateX(-48px); }
+  .reveal-slide-right{ transform: translateX(48px); }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  /* Floating animation for hero blobs */
+  @keyframes lv-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-18px) rotate(4deg); }
+  }
+  .animate-float { animation: lv-float 6s ease-in-out infinite; }
+  /* Smooth scroll behavior site-wide */
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .lv-ripple, .lv-bubble, .animate-float {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
 }

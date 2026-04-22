@@ -95,8 +95,22 @@ export default function ProductDetail() {
               <img
                 src={images[selectedImage]}
                 alt={product.name}
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  img.style.display = "none";
+                  img.parentElement?.querySelector<HTMLElement>("[data-img-fallback]")?.style.setProperty("display", "flex");
+                }}
                 className="h-full w-full object-contain p-8 transition-transform duration-500 hover:scale-110"
               />
+              <div
+                data-img-fallback
+                style={{ display: "none" }}
+                className="absolute inset-0 items-center justify-center bg-gradient-to-br from-primary/10 via-muted/40 to-accent/10 p-6 text-center"
+              >
+                <span className="font-display text-xl md:text-2xl font-bold text-foreground line-clamp-4">
+                  {product.name}
+                </span>
+              </div>
             </div>
 
             {/* Thumbnails */}
@@ -112,7 +126,7 @@ export default function ProductDetail() {
                         : "border-border/30 hover:border-primary/50"
                     }`}
                   >
-                    <img src={img} alt="" className="h-full w-full object-cover" />
+                    <img src={img} alt="" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }} className="h-full w-full object-cover" />
                   </button>
                 ))}
               </div>
