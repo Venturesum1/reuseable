@@ -7,76 +7,94 @@
 @layer base {
   :root {
     /* ========================================================
-       Lavender base (#D6B4FC) — full site renovation palette
-       Background: soft lavender
-       Cards:      crisp white
-       Text:       deep indigo/violet for high contrast
-       Accents:    cyan (primary), gold (accent), mint (secondary)
+       Deep Teal Palette
+       #003135  Deepest Teal     → primary text / dark surfaces
+       #024950  Dark Teal        → primary action
+       #964734  Rust / Terracotta → accent (CTA highlight)
+       #0FA4AF  Bright Teal      → interactive / links / focus
+       #AFDDE5  Pale Sky          → background base / muted surfaces
        ======================================================== */
 
-    --background: 271 92% 85%;          /* #D6B4FC lavender */
-    --foreground: 260 40% 18%;          /* deep violet-ink */
+    --background: 192 53% 92%;            /* #AFDDE5 pale sky */
+    --foreground: 187 100% 10%;           /* #003135 deepest teal */
 
-    --card: 60, 56%, 91%;                  /* pure white cards */
-    --card-foreground: 260 40% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 187 100% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 260 40% 18%;
+    --popover-foreground: 187 100% 10%;
 
-    /* Primary = vibrant cyan/teal (matches the cyan callouts) */
-    --primary: 188 90% 42%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary = Dark Teal #024950 */
+    --primary: 184 95% 16%;
+    --primary-foreground: 192 53% 95%;
 
-    /* Secondary = mint (soft, used on subtle chips) */
-    --secondary: 160 50% 92%;
-    --secondary-foreground: 160 50% 22%;
+    /* Secondary = Bright Teal #0FA4AF */
+    --secondary: 184 86% 37%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Muted = pale lavender on white surfaces */
-    --muted: 271 60% 96%;
-    --muted-foreground: 260 20% 45%;
+    --muted: 192 45% 88%;
+    --muted-foreground: 187 40% 25%;
 
-    /* Accent = warm gold/yellow (price highlights, CTAs) */
-    --accent: 42 95% 55%;
-    --accent-foreground: 260 40% 18%;
+    /* Accent = Rust #964734 */
+    --accent: 11 49% 39%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 75% 55%;
+    --destructive: 11 49% 39%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 271 50% 88%;              /* soft lavender border */
-    --input: 271 50% 94%;
-    --ring: 188 90% 42%;
+    --border: 192 45% 80%;
+    --input: 192 45% 88%;
+    --ring: 184 86% 37%;
 
     --radius: 0.875rem;
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 260 40% 18%;
-    --sidebar-primary: 188 90% 42%;
+    --sidebar-background: 187 100% 10%;
+    --sidebar-foreground: 192 53% 92%;
+    --sidebar-primary: 184 86% 37%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 271 80% 95%;
-    --sidebar-accent-foreground: 260 40% 18%;
-    --sidebar-border: 271 50% 88%;
-    --sidebar-ring: 188 90% 42%;
+    --sidebar-accent: 184 95% 16%;
+    --sidebar-accent-foreground: 192 53% 92%;
+    --sidebar-border: 184 95% 20%;
+    --sidebar-ring: 184 86% 37%;
 
-    /* Custom tokens used across the app */
-    --lavender: 271 92% 85%;
-    --lavender-light: 271 80% 95%;
-    --lavender-deep: 271 70% 60%;
-    --mint: 160 55% 55%;
-    --mint-light: 160 60% 92%;
-    --peach: 20 85% 70%;
-    --peach-light: 20 90% 95%;
-    --blush: 340 70% 75%;
-    --gold: 42 95% 55%;
-    --gold-light: 42 90% 92%;
-    --cyan: 188 90% 42%;
-    --cyan-light: 188 80% 92%;
+    /* Custom palette tokens */
+    --deep-teal: 187 100% 10%;       /* #003135 */
+    --dark-teal: 184 95% 16%;        /* #024950 */
+    --rust: 11 49% 39%;              /* #964734 */
+    --bright-teal: 184 86% 37%;      /* #0FA4AF */
+    --pale-sky: 192 53% 92%;         /* #AFDDE5 */
+    --pale-sky-light: 192 53% 96%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(271 92% 88%) 0%, hsl(188 80% 92%) 50%, hsl(42 90% 92%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(271 80% 98%));
-    --gradient-cta: linear-gradient(135deg, hsl(42 95% 55%), hsl(188 90% 42%));
-    --shadow-soft: 0 6px 24px -6px hsl(271 70% 50% / 0.18);
-    --shadow-hover: 0 12px 36px -6px hsl(271 70% 50% / 0.30);
-    --shadow-glow: 0 0 24px hsl(188 90% 50% / 0.35);
+    /* Backwards-compatible aliases (other components reference these) */
+    --lavender: 192 53% 92%;
+    --lavender-light: 192 53% 96%;
+    --lavender-deep: 184 95% 16%;
+    --mint: 184 86% 37%;
+    --mint-light: 184 60% 88%;
+    --peach: 11 49% 39%;
+    --peach-light: 11 50% 88%;
+    --blush: 11 49% 39%;
+    --gold: 11 49% 39%;
+    --gold-light: 11 50% 88%;
+    --cyan: 184 86% 37%;
+    --cyan-light: 184 60% 88%;
+    --warm-white: 192 53% 96%;
+    --chartreuse: 184 86% 37%;
+    --chartreuse-light: 184 60% 88%;
+    --leaf: 184 95% 16%;
+    --leaf-light: 184 60% 88%;
+    --avocado: 184 95% 16%;
+    --teal: 184 95% 16%;
+    --teal-light: 184 60% 88%;
+    --olive: 187 100% 10%;
+    --forest: 187 100% 10%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(192 53% 92%) 0%, hsl(184 60% 80%) 50%, hsl(184 86% 50%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(192 53% 96%));
+    --gradient-cta: linear-gradient(135deg, hsl(184 86% 37%), hsl(184 95% 16%));
+    --shadow-soft: 0 6px 24px -6px hsl(187 100% 10% / 0.18);
+    --shadow-hover: 0 12px 36px -6px hsl(187 100% 10% / 0.30);
+    --shadow-glow: 0 0 24px hsl(184 86% 37% / 0.45);
   }
 }
 
@@ -110,11 +128,13 @@
     display: none;
   }
   .glow-purple {
-    box-shadow: 0 0 20px hsl(260 70% 65% / 0.3), 0 0 40px hsl(260 70% 65% / 0.1);
+    box-shadow: 0 0 20px hsl(184 86% 37% / 0.35), 0 0 40px hsl(184 86% 37% / 0.15);
   }
   .glow-gold {
-    box-shadow: 0 0 20px hsl(40 85% 60% / 0.3), 0 0 40px hsl(40 85% 60% / 0.1);
+    box-shadow: 0 0 20px hsl(11 49% 39% / 0.40), 0 0 40px hsl(11 49% 39% / 0.18);
   }
+
+
     /* ========================================================
      Bubble click effect (BubbleClickEffect.tsx)
      ======================================================== */
@@ -181,5 +201,4 @@
       transform: none !important;
     }
   }
-
 }
